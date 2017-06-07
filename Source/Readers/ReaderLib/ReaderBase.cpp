@@ -12,7 +12,14 @@ namespace Microsoft { namespace MSR { namespace CNTK {
 
 std::vector<StreamDescriptionPtr> ReaderBase::GetStreamDescriptions()
 {
-    return m_deserializer->GetStreamDescriptions();
+    if (m_deserializer == NULL)
+    {
+        return m_sequenceEnumerator->GetStreamDescriptions();
+    }
+    else
+    {
+        return m_deserializer->GetStreamDescriptions();
+    }
 }
 
 ReaderBase::~ReaderBase()
